@@ -1,63 +1,65 @@
 # PromoStandards SDK for Javascript
 
+**NOTE:** This project is under early development and will have unstable API until 1.0.0
+
 ## Installing
 
 `npm install promostandards-sdk-js --save`
 
-## Example
-
-Get Product Data from a supplier
-
+## Usage
 ```javascript
+const PS = require('promostandards-sdk-js');
 
-/**
- * PromoStandards-SDK-JS will provide a Promise/callback based
- * wrapper around promostandards specification to receive data
- * in XML or JSON.
- */
-
-// Require module
-const PromoStandards = require('promostandards-sdk-js');
-
-// Initiallize a company and avoid repeatedly passing parameters
-const HIT = new PromoStandards({
-    id: 'tonystark',
-    password: 'partytime',
-    company_code: 'STARK'
-});
-
-// Initialize an service and avoid repeatedly passing parameters
-HIT_ProductData = HIT.ProductData({
+PS.getProduct({
     wsVersion: '1.0.0',
-    service_url: 'https://stark.com/CustomerProductDataService.svc',
-    wsdl_url: 'https://stark.com/CustomerProductDataService.svc?wsdl'
-}, 'json');
+    id: 'account_id',
+    password: 'password',
+    localizationCountry: 'US', // or `CA` for Canada
+    localizationLanguage: 'en', // or `fr` for French
+    productId: 'item_id'
+}).then(result => { /* do something */ });
+```
 
-// Call desired functions:
-HIT_ProductData.getProduct({
-    localizationCountry: 'US',
-    localizationLanguage: 'en',
-    productId: '5790'
-}).then(
-    product_data => console.log(product_data);
-);
+## TODO
+#### Service API
+- [ ] Product Data
+    - [ ] getProduct
+    - [ ] getProductDateModified
+    - [ ] getProductSellable
+    - [ ] getProductDateModified
+- [ ] Inventory Interface Standards
+    - [ ] getFilterValues
+    - [ ] getInventoryLevels
+- [ ] Media Content Standards
+    - [ ] getMediaContent
+    - [ ] getMediaDateModified
+- [ ] Order Shipment Notification
+    - [ ] getOrderShipmentNotification
+- [ ] Product Configuration, Decoration, and Pricing
+    - [ ] getAvailableLocations
+    - [ ] getDecorationColors
+    - [ ] getFobPoints
+    - [ ] getAvailableCharges
+    - [ ] GetConfigurationAndPricing
+- [ ] Order Status Standards
+    - [ ] getOrderStatusDetails
+    - [ ] getOrderStatusTypes
+- [ ] Purchase Order
+    - [ ] sendPO
+    - [ ] getSupportedOrderTypes
 
-HIT_ProductData.getProductDateModified({
-    changeTimeStamp: '2018-01-01'
-}).then(
-    product_id_list => console.log(product_id_list);
-);
+#### Meta API
+- [ ] Get List of Companies
+- [ ] Get List of Service Types
+- [ ] Get List of Services
+- [ ] Get Endpoint:
+    - [ ] Get List of Endpoints by Company
+    - [ ] Get Endpoint by Company and Service Type
+    - [ ] Get Endpoint by Version, Company and Service Type
+- [ ] Get Stats
 
-// OR
-
-PromoStandards.ProductData.getProduct({
-    wsVersion: '1.0.0',
-    id: 'tonystark',
-    password: 'partytime',
-    endpoint: 'https://services.starline.com/CustomerProductDataService/CustomerProductDataService.svc',
-    wsdl: 'https://services.starline.com/CustomerProductDataService/CustomerProductDataService.svc?wsdl',
-    localizationCountry: 'US',
-    localizationLanguage: 'en',
-    productId: '5790'
-}, 'json');
-```# promostandards-sdk-js
+#### Other features
+- [ ] Initialise a client with supplier information
+- [ ] Choose JSON or XML Response
+- [ ] Support Promise & callback interface
+- [ ] Use Meta API responses in Service API requests
