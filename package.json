@@ -30,5 +30,8 @@
     "code-coverage": "jest --coverage",
     "watch-tests": "jest --watch"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.18.0",
+    "pug": "^2.0.3"
+  }
 }
