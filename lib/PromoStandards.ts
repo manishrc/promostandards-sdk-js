@@ -158,5 +158,16 @@ export namespace PromoStandards {
         'ProductData.getProductCloseOut',
       ),
     };
+
+    public readonly mediaContent = {
+      getMediaContent: this.promoStandardsAPIRequest.bind(
+        this,
+        'MediaContent.getMediaContent',
+      ),
+      getMediaDateModified: this.promoStandardsAPIRequest.bind(
+        this,
+        'MediaContent.getMediaDateModified',
+      ),
+    };
   }
 }

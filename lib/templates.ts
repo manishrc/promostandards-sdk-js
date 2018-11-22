@@ -79,3 +79,47 @@ export const getProductCloseOut: () => string = pug.compile(
         shar:password #{password}
   `,
 );
+
+export const getMediaContent: () => string = pug.compile(
+  `soapenv:Envelope(
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/1.0.0/"
+  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/"
+)
+  soapenv:Header/
+  soapenv:Body
+    ns:GetMediaContentRequest
+      shar:wsVersion #{wsVersion}
+      shar:id #{id}
+      if password
+        shar:password #{password}
+      if cultureName
+        shar:cultureName #{cultureName}
+      shar:mediaType #{mediaType}
+      shar:productId #{productId}
+      if partId
+        shar:partId #{partId}
+      if classType
+        ns:classType #{classType}
+      `,
+);
+
+export const getMediaDateModified: () => string = pug.compile(
+  `soapenv:Envelope(
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/1.0.0/"
+  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/"
+)
+  soapenv:Header/
+  soapenv:Body
+    ns:GetMediaDateModifiedRequest
+      shar:wsVersion #{wsVersion}
+      shar:id #{id}
+      if password
+        shar:password #{password}
+      if cultureName
+        shar:cultureName #{cultureName}
+      if changeTimeStamp
+        shar:changeTimeStamp #{changeTimeStamp}
+      `,
+);
