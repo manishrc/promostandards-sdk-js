@@ -1,4 +1,5 @@
 import { PromoStandards } from '../lib/index';
+const nock = require('nock');
 
 describe('PromoStandardsClient', () => {
   describe('Constructor()', () => {
@@ -67,6 +68,31 @@ describe('PromoStandardsClient', () => {
     });
   });
   describe('promoStandardsAPIRequest()', () => {
+    nock('https://test.dev')
+      .persist()
+      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+      .post('/ProductData')
+      .reply(
+        200,
+        `<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/SharedObjects/" xmlns:ns2="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <SOAP-ENV:Body>
+          <ns2:GetProductResponse>
+            <ns2:Product>
+                <ns1:productId>5790</ns1:productId>
+                <ns2:productName>20 Oz. Himalayan Tumbler</ns2:productName>
+                <ns1:description>Stainless Steel Outer And Inner. Double Wall Construction For Insulation Of Hot Or Cold Liquids. Snap-On,Spill-Resistant Thumb-Slide Lid With Rubber Gasket. Due To Vacuum Insulation Technology, Capacity Is 18 Oz. With Lid On. Keeps Drinks Hot Or Cold Up To 6 Hours. Non-Skid Rubber Bottom. Meets FDA Requirements. BPA Free. Hand Wash Recommended.</ns1:description>
+                <ns2:ProductMarketingPointArray>
+                  <ns2:ProductMarketingPoint>
+                      <ns2:pointType>Highlight</ns2:pointType>
+                      <ns2:pointCopy>Stainless Steel Outer And Inner.</ns2:pointCopy>
+                  </ns2:ProductMarketingPoint>
+                </ns2:ProductMarketingPointArray>
+            </ns2:Product>
+          </ns2:GetProductResponse>
+      </SOAP-ENV:Body>
+    </SOAP-ENV:Envelope>`,
+      );
+
     const supplierClient = new PromoStandards.Client({
       id: 'aliquid',
       password: 'vitae',
@@ -80,40 +106,79 @@ describe('PromoStandardsClient', () => {
     });
     it('should return a Promise', () => {
       return expect(
-        supplierClient.promoStandardsAPIRequest('productData.getProduct', {
+        supplierClient.promoStandardsAPIRequest('ProductData.getProduct', {
           productId: '5790',
           localizationCountry: 'US',
           localizationLanguage: 'en',
         }),
       ).toBeInstanceOf(Promise);
     });
-  });
-  describe('ProductData', () => {
-    describe('getProduct()', () => {
-      const supplierClient = new PromoStandards.Client({
-        id: 'aliquid',
-        password: 'vitae',
-        endpoints: [
-          {
-            type: 'ProductData',
-            version: '1.0.0',
-            url: 'https://test.dev/ProductData',
-          },
-        ],
-      });
 
-      it('to exist', () => {
-        expect(supplierClient.productData.getProduct).toBeDefined();
+    it('should return a JSON by default', async () => {
+      await expect(
+        supplierClient.promoStandardsAPIRequest('ProductData.getProduct', {
+          productId: '5790',
+          localizationCountry: 'US',
+          localizationLanguage: 'en',
+        }),
+      ).resolves.toEqual({
+        Envelope: {
+          Body: {
+            GetProductResponse: {
+              Product: {
+                productId: 5790,
+                productName: '20 Oz. Himalayan Tumbler',
+                description:
+                  'Stainless Steel Outer And Inner. Double Wall Construction For Insulation Of Hot Or Cold Liquids. Snap-On,Spill-Resistant Thumb-Slide Lid With Rubber Gasket. Due To Vacuum Insulation Technology, Capacity Is 18 Oz. With Lid On. Keeps Drinks Hot Or Cold Up To 6 Hours. Non-Skid Rubber Bottom. Meets FDA Requirements. BPA Free. Hand Wash Recommended.',
+                ProductMarketingPointArray: [
+                  {
+                    pointType: 'Highlight',
+                    pointCopy: 'Stainless Steel Outer And Inner.',
+                  },
+                ],
+              },
+            },
+          },
+        },
       });
-      it('should return a promise, by default', () => {
-        return expect(
-          supplierClient.productData.getProduct({
-            productId: 'DELTA1',
-            localizationCountry: 'US',
-            localizationLanguage: 'en',
-          }),
-        ).toBeInstanceOf(Promise);
-      });
+    });
+    it('should optionally return an XML', async () => {
+      supplierClient.format = 'xml';
+      await expect(
+        supplierClient.promoStandardsAPIRequest('ProductData.getProduct', {
+          productId: '5790',
+          localizationCountry: 'US',
+          localizationLanguage: 'en',
+        }),
+      ).resolves.toMatch(/productId/);
+    });
+  });
+});
+describe('ProductData', () => {
+  describe('getProduct()', () => {
+    const supplierClient = new PromoStandards.Client({
+      id: 'aliquid',
+      password: 'vitae',
+      endpoints: [
+        {
+          type: 'ProductData',
+          version: '1.0.0',
+          url: 'https://test.dev/ProductData',
+        },
+      ],
+    });
+
+    it('to exist', () => {
+      expect(supplierClient.productData.getProduct).toBeDefined();
+    });
+    it('should return a promise, by default', () => {
+      return expect(
+        supplierClient.productData.getProduct({
+          productId: 'DELTA1',
+          localizationCountry: 'US',
+          localizationLanguage: 'en',
+        }),
+      ).toBeInstanceOf(Promise);
     });
   });
 });

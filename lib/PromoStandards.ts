@@ -3,6 +3,7 @@ const pug = require('pug');
 const axios = require('axios');
 
 import * as templates from './templates';
+import * as Utils from './Utils';
 
 export namespace PromoStandards {
   interface PromoStandardsAPICallParams {}
@@ -15,6 +16,7 @@ export namespace PromoStandards {
     id?: string;
     password?: string;
     endpoints?: ServiceEndpointType[];
+    format?: ResponseFormatType;
   }
 
   /** Type of service check */
@@ -65,11 +67,15 @@ export namespace PromoStandards {
     ApparelSizeArray?: any[];
   };
 
+  type ResponseFormatType = 'xml' | 'json';
+
   /** Class representing a PromoStandards Client */
   export class Client {
     public id?: string;
     public password?: string;
     public endpoints?: ServiceEndpointType[];
+
+    public format: ResponseFormatType = 'json';
 
     /**
      * Create a new PromoStandards Client
@@ -81,6 +87,7 @@ export namespace PromoStandards {
       this.id = options.id;
       this.password = options.password;
       this.endpoints = options.endpoints;
+      this.format = options.format || this.format;
     }
 
     /**
@@ -131,7 +138,12 @@ export namespace PromoStandards {
           .post(endpoint.url, requestXML, {
             headers: { 'Content-Type': 'text/xml' },
           })
-          .then((result: any) => resolve(result.data))
+          .then((result: any) => {
+            if (this.format === 'json') {
+              resolve(Utils.convertXMLtoJSON(result.data));
+            }
+            resolve(result.data);
+          })
           .catch((error: Error) => reject(error));
       });
     }
