@@ -63,7 +63,7 @@ describe('PromoStandardsClient', () => {
     it('should throw an exception if requested endpoint is not found', () => {
       expect(() => {
         supplierClient.getEndpoint('MediaContent');
-      }).toThrow('\'MediaContent\' endpoint is undefined');
+      }).toThrow("'MediaContent' endpoint is undefined");
     });
   });
   describe('promoStandardsAPIRequest()', () => {
@@ -88,8 +88,7 @@ describe('PromoStandardsClient', () => {
       ).toBeInstanceOf(Promise);
     });
   });
-
-  describe('Product Data', () => {
+  describe('ProductData', () => {
     describe('getProduct()', () => {
       const supplierClient = new PromoStandards.Client({
         id: 'aliquid',

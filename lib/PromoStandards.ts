@@ -1,8 +1,8 @@
 'use strict';
 const pug = require('pug');
 const axios = require('axios');
+
 import * as templates from './templates';
-import { declareInterface } from 'babel-types';
 
 export namespace PromoStandards {
   interface PromoStandardsAPICallParams {}
@@ -103,10 +103,6 @@ export namespace PromoStandards {
      * @param {string} methodName - Identifies the PromoStandards service time and method name
      * @param params - Arguments required for the given PromoStandards method
      * @todo validate arguments based on service/method
-     * @todo pick template based on service/method
-     * @todo render request using provided options
-     * @todo make request
-     * @todo return response
      * */
     public promoStandardsAPIRequest(
       methodName: string,
@@ -135,7 +131,8 @@ export namespace PromoStandards {
           .post(endpoint.url, requestXML, {
             headers: { 'Content-Type': 'text/xml' },
           })
-          .then((result: any) => resolve(result.data));
+          .then((result: any) => resolve(result.data))
+          .catch((error: Error) => reject(error));
       });
     }
 
