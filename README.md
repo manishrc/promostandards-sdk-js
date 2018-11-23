@@ -8,31 +8,43 @@
 
 ## Usage
 ```javascript
-const PS = require('promostandards-sdk-js');
+const { PromoStandards } = require('promostandards-sdk-js');
 
-PS.getProduct({
-    wsVersion: '1.0.0',
+// Initialize client with supplier infomation
+const supplier = new PromoStandards.Client({
     id: 'account_id',
     password: 'password',
+    endpoints: [
+        {
+            type: 'ProductData',
+            version: '1.0.0',
+            url: 'supplier.com/product-data.svc'
+        }
+    ]
+});
+
+// Get product data for item_id
+supplier.productData.getProduct({
+    productId: 'item_id', // Product ID
     localizationCountry: 'US', // or `CA` for Canada
     localizationLanguage: 'en', // or `fr` for French
-    productId: 'item_id'
-}).then(result => { /* do something */ });
+}).then(result => console.log(result));
+
 ```
 
 ## TODO
 #### Service API
-- [ ] Product Data
-    - [ ] getProduct
-    - [ ] getProductDateModified
-    - [ ] getProductSellable
-    - [ ] getProductDateModified
+- [x] Product Data
+    - [x] getProduct
+    - [x] getProductDateModified
+    - [x] getProductSellable
+    - [x] getProductDateModified
 - [ ] Inventory Interface Standards
     - [ ] getFilterValues
     - [ ] getInventoryLevels
-- [ ] Media Content Standards
-    - [ ] getMediaContent
-    - [ ] getMediaDateModified
+- [x] Media Content Standards
+    - [x] getMediaContent
+    - [x] getMediaDateModified
 - [ ] Order Shipment Notification
     - [ ] getOrderShipmentNotification
 - [ ] Product Configuration, Decoration, and Pricing
@@ -59,7 +71,7 @@ PS.getProduct({
 - [ ] Get Stats
 
 #### Other features
-- [ ] Initialise a client with supplier information
-- [ ] Choose JSON or XML Response
+- [x] Initialise a client with supplier information
+- [x] Choose JSON or XML Response
 - [ ] Support Promise & callback interface
 - [ ] Use Meta API responses in Service API requests
