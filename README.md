@@ -1,5 +1,7 @@
 # PromoStandards SDK for Javascript
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/30f7421ca372f94a0eb5/maintainability)](https://codeclimate.com/github/manishrc/promostandards-sdk-js/maintainability)
+
 **NOTE:** This project is under early development and will have unstable API until 1.0.0
 
 ## Installing
