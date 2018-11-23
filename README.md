@@ -3,7 +3,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/30f7421ca372f94a0eb5/maintainability)](https://codeclimate.com/github/manishrc/promostandards-sdk-js/maintainability)
 [![codecov](https://codecov.io/gh/manishrc/promostandards-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/manishrc/promostandards-sdk-js)
 [![npm (scoped)](https://img.shields.io/npm/v/promostandards-sdk-js.svg)](https://www.npmjs.com/package/promostandards-sdk-js)
-
+[![Build Status](https://travis-ci.org/manishrc/promostandards-sdk-js.svg?branch=master)](https://travis-ci.org/manishrc/promostandards-sdk-js)
 
 **NOTE:** This project is under early development and will have unstable API until 1.0.0
 
