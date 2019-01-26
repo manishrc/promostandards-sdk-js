@@ -37,7 +37,7 @@ describe('skipLevel()', () => {
   });
 });
 
-describe('traverseJSONForArrayTagsAndEnsureArray()', () => {
+describe('replaceArrayTagsWithArrays()', () => {
   it('should replace ArrayNodes with Arrays', () => {
     const inputJSON = JSON.parse(
       `{
@@ -105,7 +105,7 @@ describe('traverseJSONForArrayTagsAndEnsureArray()', () => {
         ]
       }`,
     );
-    expect(Util.traverseJSONForArrayTagsAndEnsureArray(inputJSON)).toEqual(
+    expect(Util.replaceArrayTagsWithArrays(inputJSON)).toEqual(
       expectedJSON,
     );
   });

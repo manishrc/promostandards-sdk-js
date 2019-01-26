@@ -1,5 +1,4 @@
 'use strict';
-const pug = require('pug');
 const axios = require('axios');
 
 import * as templates from './templates';
@@ -100,31 +99,31 @@ export namespace PromoStandards {
         endpoint = this.endpoints.find(
           x => x.type === serviceName,
         ) as ServiceEndpointType;
+        if (endpoint) return endpoint;
       }
-      if (endpoint) return endpoint;
       throw new ReferenceError(`'${serviceName}' endpoint is undefined`);
     }
 
     /**
      * Generic method to use for all PS methods
-     * @param {string} methodName - Identifies the PromoStandards service time and method name
+     * @param {string} serviceAndMethodName - Identifies the PromoStandards service type and method name
      * @param params - Arguments required for the given PromoStandards method
      * @todo validate arguments based on service/method
      * */
     public promoStandardsAPIRequest(
-      methodName: string,
+      serviceAndMethodName: string,
       params: any,
     ): Promise<any> {
       return new Promise((resolve, reject) => {
-        const [service, method] = methodName.split('.');
+        const [service, method] = serviceAndMethodName.split('.');
         const endpoint = this.getEndpoint(service as ServiceType);
 
         /** @todo fix type check*/
-        const templateIndex: {
+        const soapTemplateIndex: {
           [index: string]: any;
         } = templates;
 
-        const requestXML: string = templateIndex[method](
+        const requestXML: string = soapTemplateIndex[method](
           Object.assign(
             {
               id: this.id,
@@ -134,15 +133,15 @@ export namespace PromoStandards {
             params,
           ),
         );
+
         axios
           .post(endpoint.url, requestXML, {
             headers: { 'Content-Type': 'text/xml' },
           })
           .then((result: any) => {
-            if (this.format === 'json') {
-              resolve(Utils.convertXMLtoJSON(result.data));
-            }
-            resolve(result.data);
+            this.format === 'json'
+            ? resolve(Utils.convertXMLtoJSON(result.data))
+            : resolve(result.data);
           })
           .catch((error: Error) => reject(error));
       });

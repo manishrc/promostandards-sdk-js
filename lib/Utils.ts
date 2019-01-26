@@ -13,14 +13,14 @@ export const skipLevel = (obj: any) => {
   return obj;
 };
 
-export const traverseJSONForArrayTagsAndEnsureArray = (obj: any) => {
+export const replaceArrayTagsWithArrays = (obj: any) => {
   let key;
   if (obj instanceof Object) {
     for (key in obj) {
       if (obj.hasOwnProperty(key) && /.*Array/.test(key)) {
         obj[key] = ensureArray(skipLevel(obj[key]));
       }
-      traverseJSONForArrayTagsAndEnsureArray(obj[key]);
+      replaceArrayTagsWithArrays(obj[key]);
     }
   }
   return obj;
@@ -31,7 +31,7 @@ export const convertXMLtoJSON = (xml: string): Promise<any> => {
     xml2js.parseString(
       xml,
       {
-        explicitArray: false,
+        explicitArray: false, // explicitArray sets an array only if there are multiple records
         ignoreAttrs: true,
         tagNameProcessors: [xml2js.processors.stripPrefix],
         valueProcessors: [
@@ -43,7 +43,7 @@ export const convertXMLtoJSON = (xml: string): Promise<any> => {
         if (err) {
           reject(err);
         }
-        resolve(traverseJSONForArrayTagsAndEnsureArray(data));
+        resolve(replaceArrayTagsWithArrays(data));
       },
     );
   });
