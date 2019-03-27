@@ -1,6 +1,12 @@
 
 # Created by https://www.gitignore.io/api/node
 
+# Project Specific
+build
+
+# VSCode
+.vscode
+
 ### Node ###
 # Logs
 logs
