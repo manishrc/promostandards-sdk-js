@@ -2,10 +2,6 @@ language: node_js
 node_js:
   - "8"
   - "10"
-git:
-  depth: false
-matrix:
-  fast_finish: true
 
 install:
   - npm install
@@ -15,10 +11,8 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
-scripts:
-- npm run code-coverage
-
-after_script:
+after_success:
+  - npm run code-coverage
   - echo "This is a test"
   - ls
   - ls coverage
