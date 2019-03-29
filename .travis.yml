@@ -6,7 +6,14 @@ git:
   depth: false
 matrix:
   fast_finish: true
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 scripts:
-  - npm install codecov -g
-after_success:
-  - codecov
+  - npm install
+  - npm run code-coverage
+after_script:
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; ./cc-test-reporter format-coverage -t lcov -p ./coverage -o ./coverage/codeclimate.json; fi
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; ./cc-test-reporter upload-coverage -i ./coverage/codeclimate.json; fi
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
