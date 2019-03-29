@@ -2,11 +2,18 @@ language: node_js
 node_js:
   - "8"
   - "10"
+
 git:
   depth: false
 matrix:
   fast_finish: true
-scripts:
-  - npm install codecov -g
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 after_success:
-  - codecov
+  - npm run code-coverage
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter format-coverage -t lcov -o ./coverage/codeclimate.json ./coverage/lcov.info; fi
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage -i ./coverage/codeclimate.json; fi
