@@ -15,5 +15,6 @@ before_script:
 scripts:
   - npm run code-coverage
 after_script:
-  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter format-coverage ./coverage/lcov.info -t lcov -o ./coverage/codeclimate.json -p ./; fi
-  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi
+  - echo "This is a test"
+  - ls
+  - ls coverage
