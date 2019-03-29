@@ -13,6 +13,6 @@ before_script:
 
 after_success:
   - npm run code-coverage
-  - echo "This is a test"
-  - ls
-  - ls coverage
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter format-coverage -t lcov -o ./coverage/codeclimate.json ./coverage/lcov.info; fi
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage -i ./coverage/codeclimate.json ; fi
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
