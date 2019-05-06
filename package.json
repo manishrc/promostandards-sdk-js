@@ -30,11 +30,15 @@
     "clean": "rm -rf build && rm -rf docs",
     "watch-source": "tsc -w",
     "code-coverage": "jest --coverage",
-    "watch-tests": "jest --watch"
+    "watch-tests": "jest --watch",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "pug": "^2.0.3",
-    "xml2js": "^0.4.19"
-  }
+    "xml2js": "^0.4.19",
+    "snyk": "^1.161.1"
+  },
+  "snyk": true
 }
