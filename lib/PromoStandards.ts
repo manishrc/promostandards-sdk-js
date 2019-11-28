@@ -1,8 +1,8 @@
-'use strict';
-const axios = require('axios');
+"use strict";
+const axios = require("axios");
 
-import * as templates from './templates';
-import * as Utils from './Utils';
+import * as templates from "./templates";
+import * as Utils from "./Utils";
 
 export namespace PromoStandards {
   interface PromoStandardsAPICallParams {}
@@ -20,14 +20,14 @@ export namespace PromoStandards {
 
   /** Type of service check */
   type ServiceType =
-    | 'Inventory'
-    | 'Invoice'
-    | 'MediaContent'
-    | 'OrderShipmentNotification'
-    | 'OrderStatus'
-    | 'ProductData'
-    | 'ProductPricingAndConfiguration'
-    | 'PurchaseOrder';
+    | "Inventory"
+    | "Invoice"
+    | "MediaContent"
+    | "OrderShipmentNotification"
+    | "OrderStatus"
+    | "ProductData"
+    | "ProductPricingAndConfiguration"
+    | "PurchaseOrder";
 
   /** Service endpoint object signature check */
   type ServiceEndpointType = {
@@ -38,24 +38,24 @@ export namespace PromoStandards {
 
   /** PromoStandards method name check */
   type MethodType =
-    | 'getFilterValues'
-    | 'getInventoryLevels'
-    | 'getMediaContent'
-    | 'getMediaDateModified'
-    | 'getOrderShipmentNotification'
-    | 'getOrderStatusDetails'
-    | 'getOrderStatusTypes'
-    | 'getProduct'
-    | 'getProductDateModified'
-    | 'getProductSellable'
-    | 'getProductCloseOut'
-    | 'getAvailableLocations'
-    | 'getDecorationColors'
-    | 'getFobPoints'
-    | 'getAvailableCharges'
-    | 'GetConfigurationAndPricing'
-    | 'getSupportedOrderTypes'
-    | 'sendPO';
+    | "getFilterValues"
+    | "getInventoryLevels"
+    | "getMediaContent"
+    | "getMediaDateModified"
+    | "getOrderShipmentNotification"
+    | "getOrderStatusDetails"
+    | "getOrderStatusTypes"
+    | "getProduct"
+    | "getProductDateModified"
+    | "getProductSellable"
+    | "getProductCloseOut"
+    | "getAvailableLocations"
+    | "getDecorationColors"
+    | "getFobPoints"
+    | "getAvailableCharges"
+    | "GetConfigurationAndPricing"
+    | "getSupportedOrderTypes"
+    | "sendPO";
 
   type ProductDataGetProductArguments = PromoStandardsBaseAttributes & {
     productId: string;
@@ -66,7 +66,7 @@ export namespace PromoStandards {
     ApparelSizeArray?: any[];
   };
 
-  type ResponseFormatType = 'xml' | 'json';
+  type ResponseFormatType = "xml" | "json";
 
   /** Class representing a PromoStandards Client */
   export class Client {
@@ -74,7 +74,7 @@ export namespace PromoStandards {
     public password?: string;
     public endpoints?: ServiceEndpointType[];
 
-    public format: ResponseFormatType = 'json';
+    public format: ResponseFormatType = "json";
 
     /**
      * Create a new PromoStandards Client
@@ -97,7 +97,7 @@ export namespace PromoStandards {
       let endpoint;
       if (this.endpoints && this.endpoints.length > 0) {
         endpoint = this.endpoints.find(
-          x => x.type === serviceName,
+          x => x.type === serviceName
         ) as ServiceEndpointType;
         if (endpoint) return endpoint;
       }
@@ -112,10 +112,10 @@ export namespace PromoStandards {
      * */
     public promoStandardsAPIRequest(
       serviceAndMethodName: string,
-      params: any,
+      params: any
     ): Promise<any> {
       return new Promise((resolve, reject) => {
-        const [service, method] = serviceAndMethodName.split('.');
+        const [service, method] = serviceAndMethodName.split(".");
         const endpoint = this.getEndpoint(service as ServiceType);
 
         /** @todo fix type check*/
@@ -128,20 +128,20 @@ export namespace PromoStandards {
             {
               id: this.id,
               password: this.password,
-              wsVersion: endpoint.version,
+              wsVersion: endpoint.version
             },
-            params,
-          ),
+            params
+          )
         );
 
         axios
           .post(endpoint.url, requestXML, {
-            headers: { 'Content-Type': 'text/xml' },
+            headers: { "Content-Type": "text/xml" }
           })
           .then((result: any) => {
-            this.format === 'json'
-            ? resolve(Utils.convertXMLtoJSON(result.data))
-            : resolve(result.data);
+            this.format === "json"
+              ? resolve(Utils.convertXMLtoJSON(result.data))
+              : resolve(result.data);
           })
           .catch((error: Error) => reject(error));
       });
@@ -151,31 +151,90 @@ export namespace PromoStandards {
     public readonly productData = {
       getProduct: this.promoStandardsAPIRequest.bind(
         this,
-        'ProductData.getProduct',
+        "ProductData.getProduct"
       ),
       getProductSellable: this.promoStandardsAPIRequest.bind(
         this,
-        'ProductData.getProductSellable',
+        "ProductData.getProductSellable"
       ),
       getProductDateModified: this.promoStandardsAPIRequest.bind(
         this,
-        'ProductData.getProductDateModified',
+        "ProductData.getProductDateModified"
       ),
       getProductCloseOut: this.promoStandardsAPIRequest.bind(
         this,
-        'ProductData.getProductCloseOut',
-      ),
+        "ProductData.getProductCloseOut"
+      )
     };
 
     public readonly mediaContent = {
       getMediaContent: this.promoStandardsAPIRequest.bind(
         this,
-        'MediaContent.getMediaContent',
+        "MediaContent.getMediaContent"
       ),
       getMediaDateModified: this.promoStandardsAPIRequest.bind(
         this,
-        'MediaContent.getMediaDateModified',
+        "MediaContent.getMediaDateModified"
+      )
+    };
+
+    public readonly inventory = {
+      getInventoryLevels: this.promoStandardsAPIRequest.bind(
+        this,
+        "Inventory.getInventoryLevels"
       ),
+      getFilterValues: this.promoStandardsAPIRequest.bind(
+        this,
+        "Inventory.getFilterValues"
+      )
+    };
+
+    public readonly orderStatus = {
+      getOrderStatusDetails: this.promoStandardsAPIRequest.bind(
+        this,
+        "OrderStatus.getOrderStatusDetails"
+      ),
+      getOrderStatusTypes: this.promoStandardsAPIRequest.bind(
+        this,
+        "OrderStatus.getOrderStatusTypes"
+      )
+    };
+
+    public readonly orderShipmentNotification = {
+      getOrderShipmentNotification: this.promoStandardsAPIRequest.bind(
+        this,
+        "OrderShipmentNotification.getOrderShipmentNotification"
+      )
+    };
+
+    public readonly invoice = {
+      getInvoices: this.promoStandardsAPIRequest.bind(
+        this,
+        "Invoice.getInvoices"
+      )
+    };
+
+    public readonly productPricingAndConfiguration = {
+      getAvailableLocations: this.promoStandardsAPIRequest.bind(
+        this,
+        "ProductPricingAndConfiguration.getAvailableLocations"
+      ),
+      getDecorationColors: this.promoStandardsAPIRequest.bind(
+        this,
+        "ProductPricingAndConfiguration.getDecorationColors"
+      ),
+      getFobPoints: this.promoStandardsAPIRequest.bind(
+        this,
+        "ProductPricingAndConfiguration.getFobPoints"
+      ),
+      getAvailableCharges: this.promoStandardsAPIRequest.bind(
+        this,
+        "ProductPricingAndConfiguration.getAvailableCharges"
+      ),
+      getConfigurationAndPricing: this.promoStandardsAPIRequest.bind(
+        this,
+        "ProductPricingAndConfiguration.getConfigurationAndPricing"
+      )
     };
   }
 }
