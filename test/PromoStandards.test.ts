@@ -70,6 +70,15 @@ describe("PromoStandardsClient", () => {
   describe("promoStandardsAPIRequest()", () => {
     nock("https://test.dev")
       .persist()
+      .defaultReplyHeaders({ 
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "SOAPAction"
+      })
+      .options("/ProductData")
+      .reply(200);
+
+    nock("https://test.dev")
+      .persist()
       .defaultReplyHeaders({ "access-control-allow-origin": "*" })
       .post("/ProductData")
       .reply(
