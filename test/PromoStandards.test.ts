@@ -227,7 +227,7 @@ describe("Invoice", () => {
       expect(supplierClient.invoice.getInvoices).toBeDefined();
     });
     it("should return a promise, by default", () => {
-      return expect(supplierClient.invoice.getInvoices()).toBeInstanceOf(
+      return expect(supplierClient.invoice.getInvoices({})).toBeInstanceOf(
         Promise
       );
     });
@@ -402,7 +402,7 @@ describe("ProductData", () => {
     });
     it("should return a promise, by default", () => {
       return expect(
-        supplierClient.productData.getProductCloseOut()
+        supplierClient.productData.getProductCloseOut({})
       ).toBeInstanceOf(Promise);
     });
   });
@@ -446,7 +446,7 @@ describe("ProductPricingAndConfiguration", () => {
     });
     it("should return a promise, by default", () => {
       return expect(
-        supplierClient.productPricingAndConfiguration.getAvailableLocations()
+        supplierClient.productPricingAndConfiguration.getAvailableLocations({})
       ).toBeInstanceOf(Promise);
     });
   });
@@ -460,7 +460,7 @@ describe("ProductPricingAndConfiguration", () => {
     });
     it("should return a promise, by default", () => {
       return expect(
-        supplierClient.productPricingAndConfiguration.getDecorationColors()
+        supplierClient.productPricingAndConfiguration.getDecorationColors({})
       ).toBeInstanceOf(Promise);
     });
   });
@@ -473,7 +473,7 @@ describe("ProductPricingAndConfiguration", () => {
     });
     it("should return a promise, by default", () => {
       return expect(
-        supplierClient.productPricingAndConfiguration.getFobPoints()
+        supplierClient.productPricingAndConfiguration.getFobPoints({})
       ).toBeInstanceOf(Promise);
     });
   });
@@ -486,7 +486,7 @@ describe("ProductPricingAndConfiguration", () => {
     });
     it("should return a promise, by default", () => {
       return expect(
-        supplierClient.productPricingAndConfiguration.getAvailableCharges()
+        supplierClient.productPricingAndConfiguration.getAvailableCharges({})
       ).toBeInstanceOf(Promise);
     });
   });
@@ -499,7 +499,7 @@ describe("ProductPricingAndConfiguration", () => {
     });
     it("should return a promise, by default", () => {
       return expect(
-        supplierClient.productPricingAndConfiguration.getConfigurationAndPricing()
+        supplierClient.productPricingAndConfiguration.getConfigurationAndPricing({})
       ).toBeInstanceOf(Promise);
     });
   });
