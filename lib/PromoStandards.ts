@@ -136,7 +136,10 @@ export namespace PromoStandards {
 
         axios
           .post(endpoint.url, requestXML, {
-            headers: { "Content-Type": "text/xml" }
+            headers: {
+              "Content-Type": "text/xml",
+              "SOAPAction": method
+            }
           })
           .then((result: any) => {
             this.format === "json"
