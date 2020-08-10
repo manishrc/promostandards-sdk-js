@@ -26,6 +26,7 @@ export namespace PromoStandards {
     | "OrderShipmentNotification"
     | "OrderStatus"
     | "ProductData"
+    | "ProductData2"
     | "ProductPricingAndConfiguration"
     | "PurchaseOrder";
 
@@ -46,6 +47,7 @@ export namespace PromoStandards {
     | "getOrderStatusDetails"
     | "getOrderStatusTypes"
     | "getProduct"
+    | "getProduct2"
     | "getProductDateModified"
     | "getProductSellable"
     | "getProductCloseOut"
@@ -169,6 +171,13 @@ export namespace PromoStandards {
         "ProductData.getProductCloseOut"
       )
     };
+
+    public readonly productData2 = {
+      getProduct2: this.promoStandardsAPIRequest.bind(
+        this,
+        "ProductData2.getProduct2"
+      )
+    }
 
     public readonly mediaContent = {
       getMediaContent: this.promoStandardsAPIRequest.bind(
