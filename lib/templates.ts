@@ -81,8 +81,8 @@ export const getInvoices: () => string = pug.compile(
 export const getMediaContent: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/1.0.0/"
-  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -105,8 +105,8 @@ export const getMediaContent: () => string = pug.compile(
 export const getMediaDateModified: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/1.0.0/"
-  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/1.0.0/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -126,8 +126,8 @@ export const getMediaDateModified: () => string = pug.compile(
 export const getOrderShipmentNotification: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/1.0.0/"
-  xmlns:shar="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/1.0.0/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/" + wsVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/" + wsVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -148,8 +148,8 @@ export const getOrderShipmentNotification: () => string = pug.compile(
 export const getOrderStatusDetails: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/1.0.0/"
-  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/1.0.0/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -168,8 +168,8 @@ export const getOrderStatusDetails: () => string = pug.compile(
 export const getOrderStatusTypes: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/1.0.0/"
-  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/1.0.0/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -186,8 +186,8 @@ export const getOrderStatusTypes: () => string = pug.compile(
 export const getProduct: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -210,8 +210,8 @@ export const getProduct: () => string = pug.compile(
 export const getProductDateModified: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -230,8 +230,8 @@ export const getProductDateModified: () => string = pug.compile(
 export const getProductCloseOut: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -246,8 +246,8 @@ export const getProductCloseOut: () => string = pug.compile(
 export const getProductSellable: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/1.0.0/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -256,8 +256,7 @@ export const getProductSellable: () => string = pug.compile(
       shar:id #{id}
       if password
         shar:password #{password}
-      if productId
-        shar:productId #{productId}
+      shar:productId #{productId}
       if partId
         shar:partId #{partId}
       shar:isSellable #{isSellable}`
@@ -366,4 +365,114 @@ export const getConfigurationAndPricing: () => string = pug.compile(
       shar:localizationCountry #{localizationCountry}
       shar:localizationLanguage #{localizationLanguage}
       shar:configurationType #{configurationType}`
+);
+
+// PurchaseOrder
+// getSupportedOrderTypes()
+
+// @todo sendPO()
+export const sendPO: () => string = pug.compile(
+  `soapenv:Envelope(
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns="http://www.promostandards.org/WSDL/PO/" + wsVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/PO/" + wsVersion + "/SharedObjects/"
+)
+  soapenv:Header/
+  soapenv:Body
+    ns:SendPORequest
+      shar:wsVersion #{wsVersion}
+      shar:id #{id}
+      if password
+        shar:password #{password}
+      ns:PO
+        ns:orderType #{orderType}
+        ns:orderNumber #{orderNumber}
+        ns:orderDate #{orderDate}
+        if lastModified
+          ns:lastModified #{lastModified}
+        ns:totalAmount #{totalAmount}
+        if paymentTerms
+          ns:paymentTerms #{paymentTerms}
+        ns:rush #{rush}
+        shar:currency #{currency}
+        if DigitalProof
+          shar:DigitalProof
+            shar:DigitalProofAddressArray
+              each DigitalProofAddress in DigitalProof.DigitalProofAddressArray
+                shar:DigitalProofAddress
+                  shar:type #{DigitalProofAddress.type}
+                  shar:email #{DigitalProofAddress.email}
+                  shar:lineItemGroupingId #{DigitalProofAddress.lineItemGroupingId}
+            shar:required #{required}
+        if OrderContactArray
+          ns:OrderContactArray
+          each OrderContact in OrderContactArray
+            shar:Contact
+              if OrderContact.accountName
+                shar:accountName #{OrderContact.accountName}
+              if OrderContact.accountNumber
+                shar:accountNumber #{OrderContact.accountNumber}
+              shar:contactType #{OrderContact.contactType}
+              if OrderContact.ContactDetails
+                shar:ContactDetails
+                  if OrderContact.ContactDetails.attentionTo
+                    shar:attentionTo #{OrderContact.ContactDetails.attentionTo}
+                  if OrderContact.ContactDetails.companyName
+                    shar:companyName #{OrderContact.ContactDetails.companyName}
+                  if OrderContact.ContactDetails.address1
+                    shar:address1 #{OrderContact.ContactDetails.address1}
+                  if OrderContact.ContactDetails.address2
+                    shar:address2 #{OrderContact.ContactDetails.address2}
+                  if OrderContact.ContactDetails.address3
+                    shar:address3 #{OrderContact.ContactDetails.address3}
+                  if OrderContact.ContactDetails.city
+                    shar:city #{OrderContact.ContactDetails.city}
+                  if OrderContact.ContactDetails.region
+                    shar:region #{OrderContact.ContactDetails.region}
+                  if OrderContact.ContactDetails.postalCode
+                    shar:postalCode #{OrderContact.ContactDetails.postalCode}
+                  if OrderContact.ContactDetails.country
+                    shar:country #{OrderContact.ContactDetails.country}
+                  if OrderContact.ContactDetails.email
+                    shar:email #{OrderContact.ContactDetails.email}
+                  if OrderContact.ContactDetails.phone
+                    shar:phone #{OrderContact.ContactDetails.phone}
+                  if OrderContact.ContactDetails.comments
+                    shar:comments #{OrderContact.ContactDetails.comments}
+        ns:ShipmentArray
+          each Shipment in ShipmentArray
+            shar:Shipment
+              shar:shipReferences #{Shipment.shipReferences}
+              if Shipment.comments
+                shar:comments #{Shipment.comments}
+              if Shipment.ThirdPartyAccount
+                shar:ThirdPartyAccount
+                  shar:accountName #{Shipment.ThirdPartyAccount.accountName}
+                  shar:accountNumber #{Shipment.ThirdPartyAccount.accountNumber}
+                  shar:ContactDetails
+                    if Shipment.ThirdPartyAccount.ContactDetails.attentionTo
+                      shar:attentionTo #{Shipment.ThirdPartyAccount.ContactDetails.attentionTo}
+                    if Shipment.ThirdPartyAccount.ContactDetails.companyName
+                      shar:companyName #{Shipment.ThirdPartyAccount.ContactDetails.companyName}
+                    if Shipment.ThirdPartyAccount.ContactDetails.address1
+                      shar:address1 #{Shipment.ThirdPartyAccount.ContactDetails.address1}
+                    if Shipment.ThirdPartyAccount.ContactDetails.address2
+                      shar:address2 #{Shipment.ThirdPartyAccount.ContactDetails.address2}
+                    if Shipment.ThirdPartyAccount.ContactDetails.address3
+                      shar:address3 #{Shipment.ThirdPartyAccount.ContactDetails.address3}
+                    if Shipment.ThirdPartyAccount.ContactDetails.city
+                      shar:city #{Shipment.ThirdPartyAccount.ContactDetails.city}
+                    if Shipment.ThirdPartyAccount.ContactDetails.region
+                      shar:region #{Shipment.ThirdPartyAccount.ContactDetails.region}
+                    if Shipment.ThirdPartyAccount.ContactDetails.postalCode
+                      shar:postalCode #{Shipment.ThirdPartyAccount.ContactDetails.postalCode}
+                    if Shipment.ThirdPartyAccount.ContactDetails.country
+                      shar:country #{Shipment.ThirdPartyAccount.ContactDetails.country}
+                    if Shipment.ThirdPartyAccount.ContactDetails.email
+                      shar:email #{Shipment.ThirdPartyAccount.ContactDetails.email}
+                    if Shipment.ThirdPartyAccount.ContactDetails.phone
+                      shar:phone #{Shipment.ThirdPartyAccount.ContactDetails.phone}
+                    if Shipment.ThirdPartyAccount.ContactDetails.comments
+                      shar:comments #{Shipment.ThirdPartyAccount.ContactDetails.comments}
+        `
 );
