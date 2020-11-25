@@ -256,7 +256,8 @@ export const getProductSellable: () => string = pug.compile(
       shar:id #{id}
       if password
         shar:password #{password}
-      shar:productId #{productId}
+      if productId
+        shar:productId #{productId}
       if partId
         shar:partId #{partId}
       shar:isSellable #{isSellable}`
