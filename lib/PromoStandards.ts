@@ -68,10 +68,6 @@ export namespace PromoStandards {
 
   type ResponseFormatType = "xml" | "json";
 
-  function majorVersion(version: string = "1.0.0"): string {
-    return version.split(".")[0] + ".0.0";
-  }
-
   /** Class representing a PromoStandards Client */
   export class Client {
     public id?: string;
@@ -133,7 +129,7 @@ export namespace PromoStandards {
               id: this.id,
               password: this.password,
               wsVersion: endpoint.version,
-              majorVersion: majorVersion(endpoint.version),
+              majorVersion: Utils.majorVersion(endpoint.version),
             },
             params
           )

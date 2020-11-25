@@ -1,5 +1,5 @@
-'use strict';
-const xml2js = require('xml2js');
+"use strict";
+const xml2js = require("xml2js");
 
 export const ensureArray = (obj: any) => (obj instanceof Array ? obj : [obj]);
 
@@ -44,7 +44,11 @@ export const convertXMLtoJSON = (xml: string): Promise<any> => {
           reject(err);
         }
         resolve(replaceArrayTagsWithArrays(data));
-      },
+      }
     );
   });
 };
+
+export function majorVersion(version: string = "1.0.0"): string {
+  return version.split(".")[0] + ".0.0";
+}
