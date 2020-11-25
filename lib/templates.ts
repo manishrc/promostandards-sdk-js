@@ -5,8 +5,8 @@ const pug = require("pug");
 export const getInventoryLevels: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/Inventory/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -38,8 +38,8 @@ export const getInventoryLevels: () => string = pug.compile(
 export const getFilterValues: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/Inventory/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -56,8 +56,8 @@ export const getFilterValues: () => string = pug.compile(
 export const getInvoices: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/Invoice/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/Invoice/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/Invoice/" + wmajorVersion+ "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/Invoice/" + majorVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -81,8 +81,8 @@ export const getInvoices: () => string = pug.compile(
 export const getMediaContent: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/" + majorVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -105,8 +105,8 @@ export const getMediaContent: () => string = pug.compile(
 export const getMediaDateModified: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/MediaService/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/MediaService/" + majorVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -126,8 +126,8 @@ export const getMediaDateModified: () => string = pug.compile(
 export const getOrderShipmentNotification: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/" + wmajorVersion+ "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/OrderShipmentNotificationService/" + wmajorVersion+ "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -148,8 +148,8 @@ export const getOrderShipmentNotification: () => string = pug.compile(
 export const getOrderStatusDetails: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/" + majorVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -168,8 +168,8 @@ export const getOrderStatusDetails: () => string = pug.compile(
 export const getOrderStatusTypes: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/OrderStatusService/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/OrderStatusService/" + majorVersion + "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -186,8 +186,8 @@ export const getOrderStatusTypes: () => string = pug.compile(
 export const getProduct: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -210,8 +210,8 @@ export const getProduct: () => string = pug.compile(
 export const getProductDateModified: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -230,8 +230,8 @@ export const getProductDateModified: () => string = pug.compile(
 export const getProductCloseOut: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -246,8 +246,8 @@ export const getProductCloseOut: () => string = pug.compile(
 export const getProductSellable: () => string = pug.compile(
   `soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/"
-    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + wsVersion + "/SharedObjects/"
+    xmlns:ns="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/ProductDataService/" + majorVersion + "/SharedObjects/"
   )
   soapenv:Header/
   soapenv:Body
@@ -268,8 +268,8 @@ export const getProductSellable: () => string = pug.compile(
 export const getAvailableLocations: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wmajorVersion+ "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -287,8 +287,8 @@ export const getAvailableLocations: () => string = pug.compile(
 export const getDecorationColors: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wmajorVersion+ "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -309,8 +309,8 @@ export const getDecorationColors: () => string = pug.compile(
 export const getFobPoints: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wmajorVersion+ "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -327,8 +327,8 @@ export const getFobPoints: () => string = pug.compile(
 export const getAvailableCharges: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wmajorVersion+ "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -347,8 +347,8 @@ export const getAvailableCharges: () => string = pug.compile(
 export const getConfigurationAndPricing: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + majorVersion + "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/PricingAndConfiguration/" + wmajorVersion+ "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body
@@ -375,8 +375,8 @@ export const getConfigurationAndPricing: () => string = pug.compile(
 export const sendPO: () => string = pug.compile(
   `soapenv:Envelope(
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/PO/" + wsVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/PO/" + wsVersion + "/SharedObjects/"
+  xmlns:ns="http://www.promostandards.org/WSDL/PO/" + wmajorVersion+ "/"
+  xmlns:shar="http://www.promostandards.org/WSDL/PO/" + wmajorVersion+ "/SharedObjects/"
 )
   soapenv:Header/
   soapenv:Body

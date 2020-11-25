@@ -68,6 +68,10 @@ export namespace PromoStandards {
 
   type ResponseFormatType = "xml" | "json";
 
+  function majorVersion(version: string = "1.0.0"): string {
+    return version.split(".")[0] + ".0.0";
+  }
+
   /** Class representing a PromoStandards Client */
   export class Client {
     public id?: string;
@@ -97,7 +101,7 @@ export namespace PromoStandards {
       let endpoint;
       if (this.endpoints && this.endpoints.length > 0) {
         endpoint = this.endpoints.find(
-          x => x.type === serviceName
+          (x) => x.type === serviceName
         ) as ServiceEndpointType;
         if (endpoint) return endpoint;
       }
@@ -128,7 +132,8 @@ export namespace PromoStandards {
             {
               id: this.id,
               password: this.password,
-              wsVersion: endpoint.version
+              wsVersion: endpoint.version,
+              majorVersion: majorVersion(endpoint.version),
             },
             params
           )
@@ -138,8 +143,8 @@ export namespace PromoStandards {
           .post(endpoint.url, requestXML, {
             headers: {
               "Content-Type": "text/xml",
-              "SOAPAction": method
-            }
+              SOAPAction: method,
+            },
           })
           .then((result: any) => {
             this.format === "json"
@@ -167,7 +172,7 @@ export namespace PromoStandards {
       getProductCloseOut: this.promoStandardsAPIRequest.bind(
         this,
         "ProductData.getProductCloseOut"
-      )
+      ),
     };
 
     public readonly mediaContent = {
@@ -178,7 +183,7 @@ export namespace PromoStandards {
       getMediaDateModified: this.promoStandardsAPIRequest.bind(
         this,
         "MediaContent.getMediaDateModified"
-      )
+      ),
     };
 
     public readonly inventory = {
@@ -189,7 +194,7 @@ export namespace PromoStandards {
       getFilterValues: this.promoStandardsAPIRequest.bind(
         this,
         "Inventory.getFilterValues"
-      )
+      ),
     };
 
     public readonly orderStatus = {
@@ -200,21 +205,21 @@ export namespace PromoStandards {
       getOrderStatusTypes: this.promoStandardsAPIRequest.bind(
         this,
         "OrderStatus.getOrderStatusTypes"
-      )
+      ),
     };
 
     public readonly orderShipmentNotification = {
       getOrderShipmentNotification: this.promoStandardsAPIRequest.bind(
         this,
         "OrderShipmentNotification.getOrderShipmentNotification"
-      )
+      ),
     };
 
     public readonly invoice = {
       getInvoices: this.promoStandardsAPIRequest.bind(
         this,
         "Invoice.getInvoices"
-      )
+      ),
     };
 
     public readonly productPricingAndConfiguration = {
@@ -237,7 +242,7 @@ export namespace PromoStandards {
       getConfigurationAndPricing: this.promoStandardsAPIRequest.bind(
         this,
         "ProductPricingAndConfiguration.getConfigurationAndPricing"
-      )
+      ),
     };
   }
 }
