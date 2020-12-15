@@ -1,4 +1,6 @@
 "use strict";
+import { AxiosRequestConfig } from 'axios';
+
 const axios = require("axios");
 
 import * as templates from "./templates";
@@ -16,6 +18,7 @@ export namespace PromoStandards {
     password?: string;
     endpoints?: ServiceEndpointType[];
     format?: ResponseFormatType;
+    axiosConfig?: AxiosRequestConfig;
   }
 
   /** Type of service check */
@@ -73,6 +76,7 @@ export namespace PromoStandards {
     public id?: string;
     public password?: string;
     public endpoints?: ServiceEndpointType[];
+    public axiosConfig: AxiosRequestConfig;
 
     public format: ResponseFormatType = "json";
 
@@ -86,6 +90,7 @@ export namespace PromoStandards {
       this.id = options.id;
       this.password = options.password;
       this.endpoints = options.endpoints;
+      this.axiosConfig = options.axiosConfig || {};
       this.format = options.format || this.format;
     }
 
@@ -137,7 +142,9 @@ export namespace PromoStandards {
 
         axios
           .post(endpoint.url, requestXML, {
+            ...this.axiosConfig,
             headers: {
+              ...this.axiosConfig.headers,
               "Content-Type": "text/xml",
               SOAPAction: method,
             },
