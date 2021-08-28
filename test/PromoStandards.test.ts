@@ -76,6 +76,12 @@ describe("PromoStandardsClient", () => {
       })
       .options("/ProductData")
       .reply(200);
+    nock("https://test2.dev")
+      .persist()
+      .options("/ProductData")
+      .reply((uri: any, requestBody: any, cb: (arg0: null, arg1: (string | number)[]) => void) => {
+        setTimeout(() => cb(null, [200, '']), 2500)
+      });
 
     nock("https://test.dev")
       .persist()
@@ -113,6 +119,22 @@ describe("PromoStandardsClient", () => {
         }
       ]
     });
+
+    const supplierWithTimeoutClient = new PromoStandards.Client({
+      id: "aliquid",
+      password: "vitae",
+      axiosConfig: {
+        timeout: 1000,
+      },
+      endpoints: [
+        {
+          type: "ProductData",
+          version: "1.0.0",
+          url: "https://test2.dev/ProductData"
+        }
+      ]
+    });
+
     it("should return a Promise", () => {
       return expect(
         supplierClient.promoStandardsAPIRequest("ProductData.getProduct", {
@@ -121,6 +143,16 @@ describe("PromoStandardsClient", () => {
           localizationLanguage: "en"
         })
       ).toBeInstanceOf(Promise);
+    });
+
+    it("should return a timeout error", () => {
+      return expect(
+        supplierWithTimeoutClient.promoStandardsAPIRequest("ProductData.getProduct", {
+          productId: "5790",
+          localizationCountry: "US",
+          localizationLanguage: "en"
+        })
+      ).rejects.toThrow('timeout of 1000ms exceeded');
     });
 
     it("should return a JSON by default", async () => {
