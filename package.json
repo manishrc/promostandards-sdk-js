@@ -40,5 +40,8 @@
     "snyk": "^1.518.0",
     "xml2js": "^0.4.19"
   },
-  "snyk": true
+  "snyk": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
 }
