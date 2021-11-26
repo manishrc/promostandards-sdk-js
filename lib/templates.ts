@@ -6,32 +6,32 @@ export const getInventoryLevels: () => string = pug.compile(`
 if wsVersion == "1.2.1"
   soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/"
+    xmlns:ns="http://www.promostandards.org/WSDL/InventoryService/" + majorVersion + "/"
   )
     soapenv:Header/
     soapenv:Body
       ns:Request
-        shar:wsVersion #{wsVersion}
-        shar:id #{id}
+        ns:wsVersion #{wsVersion}
+        ns:id #{id}
         if password
-          shar:password #{password}
-        shar:productID #{productId}
+          ns:password #{password}
+        ns:productID #{productId}
         if productIDtype
-          shar:productIDtype #{productIDtype}
+          ns:productIDtype #{productIDtype}
         if filters
-          shar:Filter
+          ns:Filter
             if filters.partIdArray
-              shar:partIdArray
+              ns:partIdArray
                 each partId in filters.partIdArray
-                  shar:partId #{partId}
+                  ns:partId #{partId}
             if filters.LabelSizeArray
-              shar:LabelSizeArray
+              ns:LabelSizeArray
                 each labelSize in filters.LabelSizeArray
-                  shar:labelSize #{labelSize}
+                  ns:labelSize #{labelSize}
             if filters.PartColorArray
-              shar:PartColorArray
+              ns:PartColorArray
                 each partColor in filters.PartColorArray
-                  shar:partColor #{partColor}
+                  ns:partColor #{partColor}
 else
   soapenv:Envelope(
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
