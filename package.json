@@ -1,6 +1,6 @@
 {
   "name": "promostandards-sdk-js",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "PromoStandards JavaScript SDK",
   "homepage": "https://github.com/manishrc/promostandards-sdk-js/",
   "repository": {
@@ -37,8 +37,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "pug": "^2.0.3",
-    "xml2js": "^0.4.19",
-    "snyk": "^1.518.0"
+    "snyk": "^1.518.0",
+    "xml2js": "^0.4.19"
   },
   "snyk": true
 }
