@@ -2,36 +2,65 @@ const pug = require("pug");
 
 // Inventory
 // getInventoryLevels()
-export const getInventoryLevels: () => string = pug.compile(
-  `soapenv:Envelope(
-  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/"
-  xmlns:shar="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/SharedObjects/"
-)
-  soapenv:Header/
-  soapenv:Body
-    ns:GetInventoryLevelsRequest
-      shar:wsVersion #{wsVersion}
-      shar:id #{id}
-      if password
-        shar:password #{password}
-      shar:productId #{productId}
-      if productIDtype
-        shar:productIDtype
-      if filters
-        shar:Filter
-          if filters.partIdArray
-            shar:partIdArray
-              each partId in filters.partIdArray
-                shar:partId #{partId}
-          if filters.LabelSizeArray
-            shar:LabelSizeArray
-              each labelSize in filters.LabelSizeArray
-                shar:labelSize #{labelSize}
-          if filters.PartColorArray
-            shar:PartColorArray
-              each partColor in filters.PartColorArray
-                shar:partColor #{partColor}`
+export const getInventoryLevels: () => string = pug.compile(`
+if wsVersion == "1.2.1"
+  soapenv:Envelope(
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/"
+  )
+    soapenv:Header/
+    soapenv:Body
+      ns:Request
+        shar:wsVersion #{wsVersion}
+        shar:id #{id}
+        if password
+          shar:password #{password}
+        shar:productID #{productId}
+        if productIDtype
+          shar:productIDtype #{productIDtype}
+        if filters
+          shar:Filter
+            if filters.partIdArray
+              shar:partIdArray
+                each partId in filters.partIdArray
+                  shar:partId #{partId}
+            if filters.LabelSizeArray
+              shar:LabelSizeArray
+                each labelSize in filters.LabelSizeArray
+                  shar:labelSize #{labelSize}
+            if filters.PartColorArray
+              shar:PartColorArray
+                each partColor in filters.PartColorArray
+                  shar:partColor #{partColor}
+else
+  soapenv:Envelope(
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/"
+    xmlns:shar="http://www.promostandards.org/WSDL/Inventory/" + majorVersion + "/SharedObjects/"
+  )
+    soapenv:Header/
+    soapenv:Body
+      ns:GetInventoryLevelsRequest
+        shar:wsVersion #{wsVersion}
+        shar:id #{id}
+        if password
+          shar:password #{password}
+        shar:productId #{productId}
+        if filters
+          shar:Filter
+            if filters.partIdArray
+              shar:partIdArray
+                each partId in filters.partIdArray
+                  shar:partId #{partId}
+            if filters.LabelSizeArray
+              shar:LabelSizeArray
+                each labelSize in filters.LabelSizeArray
+                  shar:labelSize #{labelSize}
+            if filters.PartColorArray
+              shar:PartColorArray
+                each partColor in filters.PartColorArray
+                  shar:partColor #{partColor}
+`
 );
 
 // getFilterValues()
