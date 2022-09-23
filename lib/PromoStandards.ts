@@ -240,5 +240,9 @@ export namespace PromoStandards {
         "ProductPricingAndConfiguration.getConfigurationAndPricing"
       ),
     };
+
+    public readonly purchaseOrder = {
+      sendPO: this.promoStandardsAPIRequest.bind(this, "PurchaseOrder.sendPO"),
+    };
   }
 }

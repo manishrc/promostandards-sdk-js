@@ -60,8 +60,7 @@ else
               shar:PartColorArray
                 each partColor in filters.PartColorArray
                   shar:partColor #{partColor}
-`
-);
+`);
 
 // getFilterValues()
 export const getFilterValues: () => string = pug.compile(
@@ -412,8 +411,7 @@ export const sendPO: () => string = pug.compile(
     ns:SendPORequest
       shar:wsVersion #{wsVersion}
       shar:id #{id}
-      if password
-        shar:password #{password}
+      shar:password #{password}
       ns:PO
         ns:orderType #{orderType}
         ns:orderNumber #{orderNumber}
@@ -421,88 +419,229 @@ export const sendPO: () => string = pug.compile(
         if lastModified
           ns:lastModified #{lastModified}
         ns:totalAmount #{totalAmount}
-        if paymentTerms
-          ns:paymentTerms #{paymentTerms}
         ns:rush #{rush}
         shar:currency #{currency}
-        if DigitalProof
-          shar:DigitalProof
-            shar:DigitalProofAddressArray
-              each DigitalProofAddress in DigitalProof.DigitalProofAddressArray
+        if digitalProof
+          ns:DigitalProof
+            shar:required #{digitalProof.required}
+            shar:DigitalProofAddressesArray
+              each address in digitalProof.addresses
                 shar:DigitalProofAddress
-                  shar:type #{DigitalProofAddress.type}
-                  shar:email #{DigitalProofAddress.email}
-                  shar:lineItemGroupingId #{DigitalProofAddress.lineItemGroupingId}
-            shar:required #{required}
-        if OrderContactArray
+                  shar:type #{address.type}
+                  shar:email #{address.email}
+                  shar:lineItemGroupingId #{address.lineItemGroupingId}
+        if orderContactArray
           ns:OrderContactArray
-          each OrderContact in OrderContactArray
-            shar:Contact
-              if OrderContact.accountName
-                shar:accountName #{OrderContact.accountName}
-              if OrderContact.accountNumber
-                shar:accountNumber #{OrderContact.accountNumber}
-              shar:contactType #{OrderContact.contactType}
-              if OrderContact.ContactDetails
+            each contact in orderContactArray
+              shar:Contact
+                shar:contactType #{contact.contactType}
                 shar:ContactDetails
-                  if OrderContact.ContactDetails.attentionTo
-                    shar:attentionTo #{OrderContact.ContactDetails.attentionTo}
-                  if OrderContact.ContactDetails.companyName
-                    shar:companyName #{OrderContact.ContactDetails.companyName}
-                  if OrderContact.ContactDetails.address1
-                    shar:address1 #{OrderContact.ContactDetails.address1}
-                  if OrderContact.ContactDetails.address2
-                    shar:address2 #{OrderContact.ContactDetails.address2}
-                  if OrderContact.ContactDetails.address3
-                    shar:address3 #{OrderContact.ContactDetails.address3}
-                  if OrderContact.ContactDetails.city
-                    shar:city #{OrderContact.ContactDetails.city}
-                  if OrderContact.ContactDetails.region
-                    shar:region #{OrderContact.ContactDetails.region}
-                  if OrderContact.ContactDetails.postalCode
-                    shar:postalCode #{OrderContact.ContactDetails.postalCode}
-                  if OrderContact.ContactDetails.country
-                    shar:country #{OrderContact.ContactDetails.country}
-                  if OrderContact.ContactDetails.email
-                    shar:email #{OrderContact.ContactDetails.email}
-                  if OrderContact.ContactDetails.phone
-                    shar:phone #{OrderContact.ContactDetails.phone}
-                  if OrderContact.ContactDetails.comments
-                    shar:comments #{OrderContact.ContactDetails.comments}
+                  if contact.attentionTo
+                    shar:attentionTo #{contact.attentionTo}
+                  if contact.companyName
+                    shar:companyName #{contact.companyName}
+                  if contact.address1
+                    shar:address1 #{contact.address1}
+                  if contact.address2
+                    shar:address2 #{contact.address2}
+                  if contact.city
+                    shar:city #{contact.city}
+                  if contact.region
+                    shar:region #{contact.region}
+                  if contact.postalCode
+                    shar:postalCode #{contact.postalCode}
+                  if contact.country
+                    shar:country #{contact.country}
+                  if contact.phone
+                    shar:phone #{contact.phone}
+                  if contact.email
+                    shar:email #{contact.email}
+                  if contact.comments
+                    shar:comments #{contact.comments}
+                if contact.accountName
+                  shar:accountName #{contact.accountName}
+                if contact.accountNumber
+                  shar:accountNumber #{contact.accountNumber}
         ns:ShipmentArray
-          each Shipment in ShipmentArray
+          // 1 or more repetitions:
+          each shipment in shipments
             shar:Shipment
-              shar:shipReferences #{Shipment.shipReferences}
-              if Shipment.comments
-                shar:comments #{Shipment.comments}
-              if Shipment.ThirdPartyAccount
+              shar:customerPickup #{shipment.customerPickup}
+              shar:ShipTo
+                shar:customerPickup #{shipment.customerPickup}
+                shar:shipmentId #{shipment.shipTo.shipmentId}
+                shar:ContactDetails
+                  if shipment.shipTo.attentionTo
+                    shar:attentionTo #{shipment.shipTo.attentionTo}
+                  if shipment.shipTo.companyName
+                    shar:companyName #{shipment.shipTo.companyName}
+                  if shipment.shipTo.address1
+                    shar:address1 #{shipment.shipTo.address1}
+                  if shipment.shipTo.address2
+                    shar:address2 #{shipment.shipTo.address2}
+                  if shipment.shipTo.address3
+                    shar:address3 #{shipment.shipTo.address3}
+                  if shipment.shipTo.city
+                    shar:city #{shipment.shipTo.city}
+                  if shipment.shipTo.region
+                    shar:region #{shipment.shipTo.region}
+                  if shipment.shipTo.postalCode
+                    shar:postalCode #{shipment.shipTo.postalCode}
+                  if shipment.shipTo.country
+                    shar:country #{shipment.shipTo.country}
+                  if shipment.shipTo.email
+                    shar:email #{shipment.shipTo.email}
+                  if shipment.shipTo.phone
+                    shar:phone #{shipment.shipTo.phone}
+                  if shipment.shipTo.comments
+                    shar:comments #{shipment.shipTo.comments}
+              if shipment.thirdPartyAccount
                 shar:ThirdPartyAccount
-                  shar:accountName #{Shipment.ThirdPartyAccount.accountName}
-                  shar:accountNumber #{Shipment.ThirdPartyAccount.accountNumber}
+                  shar:accountName #{shipment.thirdPartyAccount.accountName}
+                  shar:accountNumber #{shipment.thirdPartyAccount.accountNumber}
                   shar:ContactDetails
-                    if Shipment.ThirdPartyAccount.ContactDetails.attentionTo
-                      shar:attentionTo #{Shipment.ThirdPartyAccount.ContactDetails.attentionTo}
-                    if Shipment.ThirdPartyAccount.ContactDetails.companyName
-                      shar:companyName #{Shipment.ThirdPartyAccount.ContactDetails.companyName}
-                    if Shipment.ThirdPartyAccount.ContactDetails.address1
-                      shar:address1 #{Shipment.ThirdPartyAccount.ContactDetails.address1}
-                    if Shipment.ThirdPartyAccount.ContactDetails.address2
-                      shar:address2 #{Shipment.ThirdPartyAccount.ContactDetails.address2}
-                    if Shipment.ThirdPartyAccount.ContactDetails.address3
-                      shar:address3 #{Shipment.ThirdPartyAccount.ContactDetails.address3}
-                    if Shipment.ThirdPartyAccount.ContactDetails.city
-                      shar:city #{Shipment.ThirdPartyAccount.ContactDetails.city}
-                    if Shipment.ThirdPartyAccount.ContactDetails.region
-                      shar:region #{Shipment.ThirdPartyAccount.ContactDetails.region}
-                    if Shipment.ThirdPartyAccount.ContactDetails.postalCode
-                      shar:postalCode #{Shipment.ThirdPartyAccount.ContactDetails.postalCode}
-                    if Shipment.ThirdPartyAccount.ContactDetails.country
-                      shar:country #{Shipment.ThirdPartyAccount.ContactDetails.country}
-                    if Shipment.ThirdPartyAccount.ContactDetails.email
-                      shar:email #{Shipment.ThirdPartyAccount.ContactDetails.email}
-                    if Shipment.ThirdPartyAccount.ContactDetails.phone
-                      shar:phone #{Shipment.ThirdPartyAccount.ContactDetails.phone}
-                    if Shipment.ThirdPartyAccount.ContactDetails.comments
-                      shar:comments #{Shipment.ThirdPartyAccount.ContactDetails.comments}
+                    if shipment.shipTo.attentionTo
+                      shar:attentionTo #{shipment.shipTo.attentionTo}
+                    if shipment.shipTo.companyName
+                      shar:companyName #{shipment.shipTo.companyName}
+                    if shipment.shipTo.address1
+                      shar:address1 #{shipment.shipTo.address1}
+                    if shipment.shipTo.address2
+                      shar:address2 #{shipment.shipTo.address2}
+                    if shipment.shipTo.address3
+                      shar:address3 #{shipment.shipTo.address3}
+                    if shipment.shipTo.city
+                      shar:city #{shipment.shipTo.city}
+                    if shipment.shipTo.region
+                      shar:region #{shipment.shipTo.region}
+                    if shipment.shipTo.postalCode
+                      shar:postalCode #{shipment.shipTo.postalCode}
+                    if shipment.shipTo.country
+                      shar:country #{shipment.shipTo.country}
+                    if shipment.shipTo.email
+                      shar:email #{shipment.shipTo.email}
+                    if shipment.shipTo.phone
+                      shar:phone #{shipment.shipTo.phone}
+                    if shipment.shipTo.comments
+                      shar:comments #{shipment.shipTo.comments}
+              // @todo shipReferences 
+              shar:packingListRequired #{shipment.packingListRequired}
+              shar:blindShip #{shipment.blindShip}
+              shar:allowConsolidation #{shipment.allowConsolidation}
+              shar:FreightDetails
+                shar:carrier #{shipment.freightDetails.carrier}
+                shar:service #{shipment.freightDetails.service}
+              if shipment.comments
+                shar:comments
+        if lineItems
+          ns:LineItemArray
+            each lineItem in lineItems
+              ns:LineItem
+                ns:lineNumber #{lineItem.lineNumber}
+                shar:description #{lineItem.description}
+                ns:lineType #{lineItem.lineType}
+                if lineItem.quantity
+                  ns:Quantity
+                    shar:uom #{lineItem.quantity.uom}
+                    shar:value #{lineItem.quantity.value}
+                if lineItem.fobId
+                  ns:fobId #{lineItem.fobId}
+                shar:ToleranceDetails
+                  // @review
+                  shar:tolerance #{lineItem.toleranceDetails.tolerance}
+                ns:allowPartialShipments #{lineItem.allowPartialShipments}
+                if lineItem.unitPrice
+                  ns:unitPrice #{lineItem.unitPrice}
+                ns:lineItemTotal #{lineItem.lineItemTotal}
+                if lineItem.requestedShipDate
+                  ns:requestedShipDate #{lineItem.requestedShipDate}
+                if lineItem.requestedInHands
+                  ns:requestedInHands #{lineItem.requestedInHands}
+                if lineItem.referenceSalesQuote
+                  ns:referenceSalesQuote #{lineItem.referenceSalesQuote}
+                // @todo Program
+                if lineItem.endCustomerSalesOrder
+                  ns:endCustomerSalesOrder #{lineItem.endCustomerSalesOrder}
+                if lineItem.productId
+                  ns:productId #{lineItem.productId}
+                if lineItem.customerProductId
+                  ns:customerProductId #{lineItem.customerProductId}
+                if lineItem.lineItemGroupingId
+                  ns:lineItemGroupingId #{lineItem.lineItemGroupingId}
+                if parts
+                  ns:PartArray
+                    eact part in parts
+                      if part.partGroup
+                        shar:partGroup #{part.partGroup}
+                      shar:partId #{part.partId}
+                      if part.customerPartId
+                        shar:customerPartId #{part.customerPartId}
+                      shar:customerSupplied #{part.customerSupplied}
+                      shar:Quantity
+                        shar:uom #{part.quantity.uom}
+                        shar:value #{part.quantity.value}
+                      if part.locationLinkId
+                        shar:locationLinkId #{part.locationLinkId}
+                      if part.unitPrice
+                        shar:unitPrice #{part.unitPrice}
+                      if part.extendedPrice
+                        shar:extendedPrice #{part.extendedPrice}
+                      if shipmentLinks
+                        shar:ShipmentLinkArray
+                          each shipmentLink in shipmentLinks
+                            shar:ShipmentLink
+                              shar:shipmentId #{shipmentLink.shipmentId}
+                              shar:Quantity #{shipmentLink.quantity}
+                                shar:uom #{shipmentLink.quantity.uom}
+                                shar:value #{shipmentLink.quantity.value}
+                if lineItem.configuration
+                  ns:Configuration
+                    ns:referenceNumber #{lineItem.configuration.referenceNumber}
+                    ns:referenceNumberType #{lineItem.configuration.referenceNumberType}
+                    ns:preProductionProof #{lineItem.configuration.preProductionProof}
+                    ns:ChargeArray
+                      each charge in lineItem.configuration.charges
+                        ns:Charge
+                          ns:chargeId #{charge.chargeId}
+                          if charge.chargeName
+                            ns:chargeName #{charge.chargeName}
+                          if charge.chargeDescription
+                            ns:description #{charge.description}
+                          ns:chargeType #{charge.chargeType}
+                          ns:Quantity
+                            shar:uom #{charge.quantity.uom}
+                            shar:value #{charge.quantity.value}
+                          ns:unitprice #{charge.unitprice}
+                          ns:extendedPrice #{charge.extendedPrice}
+                    ns:LocationArray
+                      each location in lineItem.configuration.locations
+                        ns:Location
+                          ns:locationLinkId #{location.locationLinkId}
+                          ns:locationId #{location.locationId}
+                          if location.locationName
+                            ns:locationName #{location.locationName}
+                          ns:DecorationArray #{location.DecorationArray}
+                            each decoration in location.DecorationArray
+                              ns:Decoration
+                                ns:decorationId #{decoration.decorationId}
+                                if decoration.decorationName
+                                  ns:decorationName #{decoration.decorationName}
+                                  if decoration.artwork.refArtWorkId
+                                  ns:Artwork
+                                    ns:refArtWorkId #{decoration.artwork.refArtWorkId}
+                                    ns:description #{decoration.artwork.description}
+                                    ns:instructions #{decoration.artwork.instructions}
+                                    ns:totalStitchCount #{decoration.artwork.totalStitchCount}
+                                    ns:Dimensions
+                                      ns:geometry #{decoration.artwork.dimensions.geometry}
+                                      ns:useMaxLocationDimensions #{decoration.artwork.dimensions.useMaxLocationDimensions}
+                                      ns:height #{decoration.artwork.dimensions.height}
+                                      ns:width #{decoration.artwork.dimensions.width}
+                                      ns:diameter #{decoration.artwork.dimensions.diameter}
+                                      ns:uom #{decoration.artwork.dimensions.uom}
+        ns:termsAndConditions #{termsAndConditions}
+        // @todo salesChannel
+        // @todo promoCode
+        // @todo TaxInformationArray
         `
 );
