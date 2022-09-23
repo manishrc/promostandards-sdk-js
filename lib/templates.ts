@@ -463,12 +463,19 @@ export const sendPO: () => string = pug.compile(
                 if contact.accountNumber
                   shar:accountNumber #{contact.accountNumber}
         ns:ShipmentArray
-          // 1 or more repetitions:
           each shipment in shipments
             shar:Shipment
-              shar:customerPickup #{shipment.customerPickup}
-              shar:ShipTo
+              shar:allowConsolidation #{shipment.allowConsolidation}
+              shar:blindShip #{shipment.blindShip}
+              shar:packingListRequired #{shipment.packingListRequired}
+              shar:FreightDetails
+                shar:carrier #{shipment.freightDetails.carrier}
+                shar:service #{shipment.freightDetails.service}
+              if shipment.customerPickup != null
                 shar:customerPickup #{shipment.customerPickup}
+              shar:ShipTo
+                if shipment.shipTo.customerPickup != null
+                  shar:customerPickup #{shipment.shipTo.customerPickup}
                 shar:shipmentId #{shipment.shipTo.shipmentId}
                 shar:ContactDetails
                   if shipment.shipTo.attentionTo
@@ -524,15 +531,9 @@ export const sendPO: () => string = pug.compile(
                       shar:phone #{shipment.shipTo.phone}
                     if shipment.shipTo.comments
                       shar:comments #{shipment.shipTo.comments}
-              // @todo shipReferences 
-              shar:packingListRequired #{shipment.packingListRequired}
-              shar:blindShip #{shipment.blindShip}
-              shar:allowConsolidation #{shipment.allowConsolidation}
-              shar:FreightDetails
-                shar:carrier #{shipment.freightDetails.carrier}
-                shar:service #{shipment.freightDetails.service}
+              shar:shipReferences #{shipment.shipReferences}
               if shipment.comments
-                shar:comments
+                shar:comments #{shipment.comments}
         if lineItems
           ns:LineItemArray
             each lineItem in lineItems
@@ -547,7 +548,6 @@ export const sendPO: () => string = pug.compile(
                 if lineItem.fobId
                   ns:fobId #{lineItem.fobId}
                 shar:ToleranceDetails
-                  // @review
                   shar:tolerance #{lineItem.toleranceDetails.tolerance}
                 ns:allowPartialShipments #{lineItem.allowPartialShipments}
                 if lineItem.unitPrice
@@ -559,7 +559,6 @@ export const sendPO: () => string = pug.compile(
                   ns:requestedInHands #{lineItem.requestedInHands}
                 if lineItem.referenceSalesQuote
                   ns:referenceSalesQuote #{lineItem.referenceSalesQuote}
-                // @todo Program
                 if lineItem.endCustomerSalesOrder
                   ns:endCustomerSalesOrder #{lineItem.endCustomerSalesOrder}
                 if lineItem.productId
@@ -639,9 +638,5 @@ export const sendPO: () => string = pug.compile(
                                       ns:width #{decoration.artwork.dimensions.width}
                                       ns:diameter #{decoration.artwork.dimensions.diameter}
                                       ns:uom #{decoration.artwork.dimensions.uom}
-        ns:termsAndConditions #{termsAndConditions}
-        // @todo salesChannel
-        // @todo promoCode
-        // @todo TaxInformationArray
-        `
+        ns:termsAndConditions #{termsAndConditions}`
 );
