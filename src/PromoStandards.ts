@@ -135,8 +135,6 @@ export namespace PromoStandards {
           )
         );
 
-        console.debug("XML Request: ", requestXML);
-
         axios
           .post(endpoint.url, requestXML, {
             headers: {
