@@ -1,6 +1,9 @@
 {
   "name": "promostandards-sdk-js",
   "version": "0.1.8",
+  "engines": {
+    "node": ">=14.x"
+  },
   "description": "PromoStandards JavaScript SDK",
   "homepage": "https://github.com/manishrc/promostandards-sdk-js/",
   "repository": {
