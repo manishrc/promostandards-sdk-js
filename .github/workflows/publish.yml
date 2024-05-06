@@ -1,4 +1,4 @@
-name: Release & Publish
+name: Publish
 
 on:
   push:
@@ -15,27 +15,27 @@ jobs:
           - windows-latest
         node: ["14.x", "16.x"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - name: Install modules
-        run: npm install
-      - name: Run tests
-        run: npm run test
+          cache: "npm"
+      - run: npm ci
+      - run: npm run test
   release:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          cache: "npm"
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           draft: false
@@ -45,17 +45,15 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup .npmrc file to publish to npm
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
+          cache: "npm"
           node-version: "14.x"
           registry-url: "https://registry.npmjs.org"
-      - name: Install modules
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Publish to npm
-        run: npm publish --access public
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
