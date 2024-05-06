@@ -35,7 +35,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          cache: "npm"
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           draft: false

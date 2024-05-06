@@ -5,7 +5,7 @@
 [![Test](https://github.com/manishrc/promostandards-sdk-js/actions/workflows/test.yml/badge.svg)](https://github.com/manishrc/promostandards-sdk-js/actions/workflows/test.yml)
 [![npm (scoped)](https://img.shields.io/npm/v/promostandards-sdk-js.svg)](https://www.npmjs.com/package/promostandards-sdk-js)
 
-**NOTE:** This project is under early development and will have unstable API until 1.0.0
+**NOTE:** This project is under development and will have unstable API until 1.0.0
 
 ## Installing
 
