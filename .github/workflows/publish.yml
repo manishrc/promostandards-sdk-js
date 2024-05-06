@@ -6,7 +6,26 @@ on:
       - "v*"
 
 jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+        node: ["14.x", "16.x"]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install modules
+        run: npm install
+      - name: Run tests
+        run: npm run test
   release:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -23,6 +42,7 @@ jobs:
           prerelease: false
 
   publish:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
