@@ -4,7 +4,7 @@
   "description": "PromoStandards JavaScript SDK",
   "homepage": "https://github.com/manishrc/promostandards-sdk-js/",
   "repository": {
-    "url": "https://github.com/manishrc/promostandards-sdk-js/",
+    "url": "git+https://github.com/manishrc/promostandards-sdk-js.git",
     "type": "git"
   },
   "main": "./build/index.js",
