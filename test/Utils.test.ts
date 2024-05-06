@@ -1,4 +1,4 @@
-import * as Util from '../lib/Utils';
+import * as Util from '../src/Utils';
 
 describe('ensureArray()', () => {
   it('should always return an array', () => {

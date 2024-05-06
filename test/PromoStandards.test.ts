@@ -1,4 +1,4 @@
-import { PromoStandards } from "../lib/index";
+import { PromoStandards } from "../src/index";
 const nock = require("nock");
 
 describe("PromoStandardsClient", () => {
