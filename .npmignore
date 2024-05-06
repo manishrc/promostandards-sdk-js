@@ -1,0 +1,4 @@
+tags
+.env*
+.synk
+.travis.yml

@@ -86,5 +86,7 @@ typings/
 # FuseBox cache
 .fusebox/
 
+# Misc
+tags
 
 # End of https://www.gitignore.io/api/node
