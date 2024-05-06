@@ -34,7 +34,8 @@
     "watch-tests": "jest --watch",
     "snyk-protect": "snyk-protect",
     "prepare": "npm run snyk-protect",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postversion": "git push --follow-tags"
   },
   "dependencies": {
     "axios": "^1.6.8",
