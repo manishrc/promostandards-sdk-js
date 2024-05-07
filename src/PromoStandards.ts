@@ -78,9 +78,11 @@ export namespace PromoStandards {
 
     /**
      * Create a new PromoStandards Client
+     * @param {Object} options - Options for the client
      * @param {string} options.id - Username provided by the supplier
      * @param {string} options.password - Password provided by the supplier
-     * @param {Array.<ServiceEndpointType>} options.endpoints - List of endpoint objects
+     * @param {ServiceEndpointType[]} options.endpoints - List of endpoint objects
+     * @param {('json'|'xml')} options.format - Response format type (default: "json")
      */
     constructor(options: PromoStandardsBaseAttributes = {}) {
       this.id = options.id;
