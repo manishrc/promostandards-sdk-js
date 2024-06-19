@@ -43,7 +43,7 @@
   "dependencies": {
     "axios": "^1.6.8",
     "pug": "^3.0.2",
-    "snyk": "^1.1291.0",
+    "snyk": "^1.1291.1",
     "xml2js": "^0.6.2"
   },
   "snyk": true,
