@@ -14,29 +14,82 @@
 ## Usage
 
 ```javascript
-const { PromoStandards } = require("promostandards-sdk-js");
+// const { PromoStandards } = require("promostandards-sdk-js");
+import { PromoStandards } from 'promostandards-sdk-js';
 
-// Initialize client with supplier infomation
-const supplier = new PromoStandards.Client({
-  id: "account_id",
-  password: "password",
-  endpoints: [
-    {
-      type: "ProductData",
-      version: "1.0.0",
-      url: "supplier.com/product-data.svc",
-    },
-  ],
-});
+(async function main() {
+  const supplier = new PromoStandards.Client({
+    id: 'account_id',
+    password: 'password',
+    endpoints: [
+      {
+        type: 'ProductData',
+        version: '2.0.0',
+        url: 'https://supplier.com/productData',
+      },
+      {
+        type: 'MediaContent',
+        version: '1.1.0',
+        url: 'https://supplier.com/productMedia',
+      },
+      {
+        type: 'Inventory',
+        version: '2.0.0',
+        url: 'https://supplier.com/inventory',
+      },
+      {
+        type: 'ProductPricingAndConfiguration',
+        version: '1.0.0',
+        url: 'https://supplier.com/pricingAndConfiguration',
+      },
+    ],
+  });
 
-// Get product data for item_id
-supplier.productData
-  .getProduct({
-    productId: "item_id", // Product ID
-    localizationCountry: "US", // or `CA` for Canada
-    localizationLanguage: "en", // or `fr` for French
-  })
-  .then((result) => console.log(result));
+  // Product Data
+  // https://tools.promostandards.org/product-data-2-0-0
+  const productData = await supplier.productData.getProduct({
+    productId: 'item_id', // Product ID
+    localizationCountry: 'US', // or `CA` for Canada
+    localizationLanguage: 'en', // or `fr` for French
+  });
+
+  // Media Content
+  // https://tools.promostandards.org/media-content-1-1-0
+  const mediaContentData = await supplier.mediaContent.getMediaContent({
+    mediaType: 'Image',
+    productId: 'item_id',
+    classType: 1006,
+  });
+
+  // Inventory
+  // https://tools.promostandards.org/inventory-2-0-0
+  const inventoryData = await supplier.inventory.getInventoryLevels({
+    productId: 'item_id',
+  });
+
+  // Product Pricing and Configuration
+  // https://tools.promostandards.org/product-pricing-and-configuration-1-0-0
+  const productPricingAndConfigurationData =
+    await supplier.productPricingAndConfiguration.getConfigurationAndPricing({
+      productId: 'item_id',
+      currency: 'USD',
+      priceType: 'Customer',
+      fobId: 1,
+    });
+
+  console.log(
+    JSON.stringify(
+      {
+        productData,
+        mediaContentData,
+        inventoryData,
+        productPricingAndConfigurationData,
+      },
+      null,
+      2
+    )
+  );
+})();
 ```
 
 ## TODO
