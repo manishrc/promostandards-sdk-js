@@ -7,6 +7,8 @@
 
 **NOTE:** This project is under development and will have unstable API until 1.0.0
 
+**tip:** Ask AI questions about this project and generate code using [DeepWiki](https://deepwiki.com/manishrc/promostandards-sdk-js)↗︎.
+
 ## Installing
 
 `npm install promostandards-sdk-js --save`
